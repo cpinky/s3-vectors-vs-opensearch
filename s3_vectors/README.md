@@ -80,7 +80,6 @@ Before running the comparison app, export your S3 Vector index to OpenSearch Ser
 ![Export to OpenSearch](export-to-opensearch.png)
 
 5. **Configure Export Settings**: 
-   - Choose OpenSearch Serverless as the destination
    - Configure the target collection and index name
    - Click "Export" to start the process
 
@@ -92,9 +91,9 @@ Before running the comparison app, export your S3 Vector index to OpenSearch Ser
    - Go to your OpenSearch Serverless collection in the AWS Console
    - Click on the "OpenSearch Dashboard" link 
    - Click "Interact with the OpenSearch API"
-   - Use the default query: `GET _search {"query": {"match_all": {}}}`
+   - Use the default query: `GET _cat/indices`
    - Click the play button to execute
-   - Note down the index name from the response (should be around line 18)
+   - Note down the index name from the response
    - This index name will be used in the Streamlit configuration
 
 8. **Configure Data Access Policy**:
@@ -103,8 +102,10 @@ Before running the comparison app, export your S3 Vector index to OpenSearch Ser
    - Click "Edit"
    - Click "Add principal"
    - Select the IAM role that your CLI/application will use
+      - If you are using the CLI, use 'aws sts get-caller-identity' to find the ARN
    - Save the policy changes
    - This allows your application to query the OpenSearch index
+   - Allow a few minutes for it to update
 
 
 
